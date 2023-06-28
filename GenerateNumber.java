@@ -25,17 +25,17 @@ public class GenerateNumber {
         switch(difficulty) {
             case "facile":
                 bound = 10;
-                operation = 1;
+                operation = 2;
                 answers = 20;
                 break;
             case "moyen":
                 bound = 15;
-                operation = 2;
+                operation = 3;
                 answers = 50;
                 break;
             case "difficile":
                 bound = 20;
-                operation = 3;
+                operation = 4;
                 answers = 60;
                 break;
             default:
@@ -72,7 +72,7 @@ public class GenerateNumber {
 
     public static int generateRandomNumber(int n) {
         //return a random number between 0 and n
-        int random = new Random().nextInt(n + 1);
+        int random = new Random().nextInt(n);
         if (isPremier(random)){
             return generateRandomNumber(n);
         }
@@ -81,22 +81,25 @@ public class GenerateNumber {
     public static void displayProposition(ArrayList<Integer> Proposition, int numb) {
         ArrayList<Integer> answers = new ArrayList<>(Arrays.asList(0, 0, 0, 0));
         ArrayList<Integer> used = new ArrayList<>();
-        int count = 0; // Compteur pour suivre le nombre de réponses uniques déjà générées
     
         Random random = new Random();
     
-        while (count < numb) {
-            int index = random.nextInt(numb); // Génère un index aléatoire dans la plage de propositions
+        for (int i = 0; i < numb; i++) {
+            int index;
+            boolean uniqueIndex = false;
     
-            if (!used.contains(index)) {
-                used.add(index);
-                answers.set(index, Proposition.get(count));
-                count++;
+            while (!uniqueIndex) {
+                index = random.nextInt(numb);
+                if (!used.contains(index)) {
+                    used.add(index);
+                    answers.set(index, Proposition.get(i));
+                    uniqueIndex = true;
+                }
             }
         }
-    
         for (int i = 0; i < answers.size(); i++) {
             System.out.println(answers.get(i));
         }
     }
 }
+    

@@ -16,8 +16,9 @@ public class Main {
         }
         //generate the calculus
         int first = GenerateNumber.generateRandomNumber(GNumber.getBound());
-        Operations op = Operations.values()[GenerateNumber.generateRandomNumber(GNumber.getOperation())];
-
+        Operations[] operations = Operations.values();
+        Operations op = operations[GenerateNumber.generateRandomNumber(GNumber.getOperation())];
+        
         //get answer
         int res = 0;
         int second = 0;
@@ -30,7 +31,7 @@ public class Main {
                 break;
             case MINUS:
                 second = GenerateNumber.generateRandomNumber(GNumber.getBound());
-                res = abs(first - second);
+                res = (first - second);
                 operator = "-";
                 break;
             case MULTI:
