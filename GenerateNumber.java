@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 
@@ -73,29 +74,28 @@ public class GenerateNumber {
         //return a random number between 0 and n
         int random = new Random().nextInt(n + 1);
         if (isPremier(random)){
-            generateRandomNumber(n);
+            return generateRandomNumber(n);
         }
         return random;
     }
-
-    public static void displayProposition(var Proposition, int numb)
-    {
-        var answers = new ArrayList<>();
-        var used = new ArrayList<>();
-        for (int i = 0; i < numb; i++)
-        {
-            int k = generateRandomNumber(3);
-            if (used.contains(k)){
-                numb -= used.size();
-                displayProposition(Proposition, numb);
-            }
-            else {
-                used.add(k);
-                answers.set(k, Proposition[i]);
+    public static void displayProposition(ArrayList<Integer> Proposition, int numb) {
+        ArrayList<Integer> answers = new ArrayList<>(Arrays.asList(0, 0, 0, 0));
+        ArrayList<Integer> used = new ArrayList<>();
+        int count = 0; // Compteur pour suivre le nombre de réponses uniques déjà générées
+    
+        Random random = new Random();
+    
+        while (count < numb) {
+            int index = random.nextInt(numb); // Génère un index aléatoire dans la plage de propositions
+    
+            if (!used.contains(index)) {
+                used.add(index);
+                answers.set(index, Proposition.get(count));
+                count++;
             }
         }
-        for (int i = 0; i < answers.size(); i++)
-        {
+    
+        for (int i = 0; i < answers.size(); i++) {
             System.out.println(answers.get(i));
         }
     }
