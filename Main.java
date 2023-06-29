@@ -17,7 +17,7 @@ public class Main {
         //generate the calculus
         int first = GenerateNumber.generateRandomNumber(GNumber.getBound());
         Operations[] operations = Operations.values();
-        Operations op = operations[GenerateNumber.generateRandomNumber(GNumber.getOperation())];
+        Operations op = operations[GenerateNumber.generateRandomNumberOP(GNumber.getOperation())];
         
         //get answer
         int res = 0;
@@ -40,11 +40,20 @@ public class Main {
                 operator = "*";
                 break;
             case DIV:
-                var List = GenerateNumber.Div(first);
-                second = GenerateNumber.generateRandomNumber(List.size());
-                res = first / (int) List.get(second);
-                operator = "/";
+                var divisors = GenerateNumber.Div(first);
+                if (divisors.isEmpty()) {
+                    // Si le premier nombre est un nombre premier, aucun diviseur n'est disponible
+                    second = 1;
+                    res = first / second;
+                    operator = "/";
+                } else {
+                    Integer[] divisorsArray = (Integer[]) divisors.toArray(new Integer[0]);
+                    second = divisorsArray[GenerateNumber.generateRandomNumber(divisorsArray.length)];
+                    res = first / second;
+                    operator = "/";
+                }
                 break;
+            
             default :
                 break;
             

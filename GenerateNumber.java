@@ -61,6 +61,9 @@ public class GenerateNumber {
     public static ArrayList Div(int n)
     {
         ArrayList ListDiv = new ArrayList<>();
+        if (isPremier(n)) {
+            return new ArrayList<>();
+        }        
         for (int i = 2; i <= n; i++)
         {
             if (n % i == 0) {
@@ -73,9 +76,14 @@ public class GenerateNumber {
     public static int generateRandomNumber(int n) {
         //return a random number between 0 and n
         int random = new Random().nextInt(n);
-        if (isPremier(random)){
+        if (isPremier(random) || random == 1){
             return generateRandomNumber(n);
         }
+        return random;
+    }
+    public static int generateRandomNumberOP(int n) {
+        //return a random number between 0 and n
+        int random = new Random().nextInt(n);
         return random;
     }
     public static void displayProposition(ArrayList<Integer> Proposition, int numb) {
